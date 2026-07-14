@@ -983,10 +983,12 @@
         async function uploadFileToStorage(folderName, file) {
             if (!file) return null;
 
-            const originalName = file.name.replace(/\.[^/.]+$/, ''); // nama tanpa ekstensi
+            let originalName = file.name.replace(/\.[^/.]+$/, ''); // nama tanpa ekstensi
+            // Hapus karakter spesial yang bisa merusak URL (seperti ?, #, %, dll) tapi biarkan spasi
+            originalName = originalName.replace(/[^a-zA-Z0-9\-_ ]/g, '_');
             const fileExt = file.name.split('.').pop();
             const timestamp = new Date().toISOString().replace(/[:.]/g, '-'); // format aman untuk path
-            const fileName = `${originalName}, ${timestamp}.${fileExt}`;
+            const fileName = `${originalName}_${timestamp}.${fileExt}`;
             const filePath = `${folderName}/${fileName}`;
 
             const client = getDbClient(); // Akan throw jika submission ditutup
