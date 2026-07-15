@@ -994,7 +994,10 @@
             const client = getDbClient(); // Akan throw jika submission ditutup
             const { data, error } = await client.storage
                 .from(BUCKET_NAME)
-                .upload(filePath, file);
+                .upload(filePath, file, {
+                    cacheControl: '3600',
+                    upsert: true
+                });
 
             if (error) throw new Error(`Gagal upload berkas ${folderName}: ${error.message}`);
 
