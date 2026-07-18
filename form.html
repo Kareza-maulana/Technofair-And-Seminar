@@ -700,41 +700,40 @@
             <span class="line1">SUBMISION LKTI</span>
         </h1>
 
-        <!-- COUNTDOWN -->
-        <div class="countdown-box reveal">
+        <!-- COUNTDOWN FULLPAPER -->
+        <div class="countdown-box reveal" id="countdownBoxFullpaper" style="margin-bottom: 40px;">
             <div class="countdown-label">&#9200; WAKTU TERSISA</div>
-            <div class="countdown-title" id="countdownTitle">Batas Pengumpulan<br>Karya LKTI TFS 2026</div>
+            <div class="countdown-title">Batas Pengumpulan<br>Fullpaper LKTI TFS 2026</div>
             <div class="countdown-grid">
                 <div class="countdown-unit">
-                    <span class="countdown-num" id="cd-days">00</span>
+                    <span class="countdown-num" id="fp-cd-days">00</span>
                     <span class="countdown-unit-label">Hari</span>
                 </div>
                 <div class="countdown-unit">
-                    <span class="countdown-num" id="cd-hours">00</span>
+                    <span class="countdown-num" id="fp-cd-hours">00</span>
                     <span class="countdown-unit-label">Jam</span>
                 </div>
                 <div class="countdown-unit">
-                    <span class="countdown-num" id="cd-mins">00</span>
+                    <span class="countdown-num" id="fp-cd-mins">00</span>
                     <span class="countdown-unit-label">Menit</span>
                 </div>
                 <div class="countdown-unit">
-                    <span class="countdown-num" id="cd-secs">00</span>
+                    <span class="countdown-num" id="fp-cd-secs">00</span>
                     <span class="countdown-unit-label">Detik</span>
                 </div>
             </div>
-            <div class="deadline-note" id="deadlineNote">&#128197; Deadline: <span id="deadlineText">15 Juli 2026, 23:59
-                    WIB</span></div>
-            <div class="countdown-expired-label">&#x26D4; SUBMISSION TELAH dITUTUP</div>
+            <div class="deadline-note">&#128197; Deadline: <span id="fpDeadlineText">5 Agustus 2026, 23:59 WIB</span></div>
+            <div class="countdown-expired-label">&#x26D4; SUBMISSION TELAH DITUTUP</div>
         </div>
 
-        <!-- SUBMISSION CLOSED OVERLAY (ditampilkan saat deadline lewat) -->
-        <div class="submission-closed-overlay" id="submissionClosedOverlay">
+        <!-- SUBMISSION CLOSED OVERLAY FULLPAPER -->
+        <div class="submission-closed-overlay" id="fpSubmissionClosedOverlay">
             <div class="closed-card">
                 <span class="closed-icon">🔒</span>
                 <h2 class="closed-title">SUBMISSION<br>TELAH DITUTUP</h2>
                 <p class="closed-subtitle">
-                    Batas waktu pengumpulan abstrak LKTI TFS 2026<br>
-                    telah berakhir pada <strong style="color: var(--red-fire);">15 Juli 2026, 23:59 WIB</strong>.
+                    Batas waktu pengumpulan Fullpaper LKTI TFS 2026<br>
+                    telah berakhir pada <strong style="color: var(--red-fire);">5 Agustus 2026, 23:59 WIB</strong>.
                 </p>
                 <div class="closed-badge">&#x26D4; Penerimaan Ditutup</div>
                 <div class="closed-deadline-info">
@@ -743,110 +742,98 @@
             </div>
         </div>
 
-        <div class="form-container" id="formMainContainer">
-            <div class="tab-nav">
-                <button type="button" class="tab-btn active" onclick="switchTab('abstrak')">Abstrak</button>
-                <button type="button" class="tab-btn" onclick="switchTab('fullpaper')">Fullpaper</button>
-            </div>
+        <!-- FORM FULLPAPER -->
+        <div class="form-container" id="fpFormMainContainer">
+            <form id="fullpaperForm">
 
-            <div id="tab-abstrak" class="tab-pane active">
-                <form id="submissionForm">
-
-                    <div class="section-title">Informasi Tim</div>
-                    <div class="form-group">
-                        <label>Nama Tim</label>
-                        <input type="text" id="namaTim" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Asal Universitas</label>
-                        <input type="text" id="asalUniv" required>
-                    </div>
-
-                    <div class="section-title">Data Ketua Tim</div>
-                    <div class="form-group">
-                        <label>Nama Ketua</label>
-                        <input type="text" id="namaKetua" required>
-                    </div>
-                    <div class="form-group">
-                        <label>NIM Ketua</label>
-                        <input type="text" id="nimKetua" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Jurusan Ketua</label>
-                        <input type="text" id="jurusanKetua" required>
-                    </div>
-
-
-
-                    <div class="section-title">Upload Berkas</div>
-                    <div class="form-group">
-                        <label>Upload File KTM (Jadikan 1 file PDF/Gambar)</label>
-                        <input type="file" id="inputKtm" accept=".pdf, image/*" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Upload File Karya (Format .pdf max 5MB disarankan)</label>
-                        <input type="file" id="inputKarya" accept=".pdf" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Bukti Upload Twibbon (Format .pdf)</label>
-                        <p>Note: seluruh akun anggota tidak boleh diprivate dan tidak boleh di take down selama TFS 2026
-                            berlangsung</p>
-                        <input type="file" id="inputTwibon" accept=".pdf" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Bukti Share Pamflet (Format .pdf)</label>
-                        <p>Note: Share pamflet beserta Caption minimal 3 grup whatsapp untuk masing-masing anggota</p>
-                        <input type="file" id="inputPamflet" accept=".pdf" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Bukti Follow Sosmed (Format .pdf)</label>
-                        <p>Note: Follow akun Instagram untuk masing masing anggota(dibuat dalam 1 file PDF)</p>
-                        <input type="file" id="inputSosmed" accept=".pdf" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Lembar Orisinalitas Karya (Format .pdf)</label>
-                        <input type="file" id="inputOrisinalitas" accept=".pdf" required>
-                    </div>
-
-                    <button type="submit" id="btnSubmit">
-                        <div id="btnProgress" class="btn-progress-fill"></div>
-                        <span id="btnText">Kirim Submission</span>
-                    </button>
-                    <div id="status"></div>
-                </form>
-            </div>
-
-            <div id="tab-fullpaper" class="tab-pane">
-                <div class="coming-soon-container">
-                    <div class="lock-icon">🔒</div>
-                    <h3>COMING SOON</h3>
-                    <p>Tahap Fullpaper belum dibuka. Pantau terus informasi selanjutnya!</p>
+                <div class="section-title">Informasi Tim</div>
+                <div class="form-group">
+                    <label>Nama Tim</label>
+                    <input type="text" id="fpNamaTim" required>
                 </div>
-            </div>
+                <div class="form-group">
+                    <label>Nomor Kelompok</label>
+                    <input type="text" id="fpNomorKelompok" required>
+                </div>
+                <div class="form-group">
+                    <label>Nama Dosen Pembimbing</label>
+                    <input type="text" id="fpNamaDosenPembimbing" required>
+                </div>
+                <div class="form-group">
+                    <label>Asal Universitas</label>
+                    <input type="text" id="fpAsalUniv" required>
+                </div>
+
+                <div class="section-title">Data Ketua Tim</div>
+                <div class="form-group">
+                    <label>Nama Ketua</label>
+                    <input type="text" id="fpNamaKetua" required>
+                </div>
+                <div class="form-group">
+                    <label>NIM Ketua</label>
+                    <input type="text" id="fpNimKetua" required>
+                </div>
+                <div class="form-group">
+                    <label>Jurusan Ketua</label>
+                    <input type="text" id="fpJurusanKetua" required>
+                </div>
+                <div class="form-group">
+                    <label>Nomor WhatsApp Ketua</label>
+                    <input type="text" id="fpWaKetua" required>
+                </div>
+
+                <div class="section-title">Data Anggota 1</div>
+                <div class="form-group">
+                    <label>Nama Anggota 1</label>
+                    <input type="text" id="fpNamaAnggota1">
+                </div>
+                <div class="form-group">
+                    <label>NIM Anggota 1</label>
+                    <input type="text" id="fpNimAnggota1">
+                </div>
+                <div class="form-group">
+                    <label>Jurusan Anggota 1</label>
+                    <input type="text" id="fpJurusanAnggota1">
+                </div>
+                <div class="form-group">
+                    <label>Nomor WhatsApp Anggota 1</label>
+                    <input type="text" id="fpWaAnggota1">
+                </div>
+
+                <div class="section-title">Data Anggota 2</div>
+                <div class="form-group">
+                    <label>Nama Anggota 2</label>
+                    <input type="text" id="fpNamaAnggota2">
+                </div>
+                <div class="form-group">
+                    <label>NIM Anggota 2</label>
+                    <input type="text" id="fpNimAnggota2">
+                </div>
+                <div class="form-group">
+                    <label>Jurusan Anggota 2</label>
+                    <input type="text" id="fpJurusanAnggota2">
+                </div>
+                <div class="form-group">
+                    <label>Nomor WhatsApp Anggota 2</label>
+                    <input type="text" id="fpWaAnggota2">
+                </div>
+
+                <div class="section-title">Upload Fullpaper</div>
+                <div class="form-group">
+                    <label>Upload File Fullpaper (Format .pdf)</label>
+                    <input type="file" id="fpFileFullpaper" accept=".pdf" required>
+                </div>
+
+                <button type="submit" id="fpBtnSubmit">
+                    <div id="fpBtnProgress" class="btn-progress-fill"></div>
+                    <span id="fpBtnText">Kirim Submission</span>
+                </button>
+                <div id="fpStatus"></div>
+            </form>
         </div>
     </div>
 
     <script>
-        // Tab logic
-        function switchTab(tabId) {
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            document.querySelectorAll('.tab-pane').forEach(pane => {
-                pane.classList.remove('active');
-            });
-
-            // Activate clicked tab button
-            const buttons = document.querySelectorAll('.tab-btn');
-            if (tabId === 'abstrak') {
-                buttons[0].classList.add('active');
-            } else {
-                buttons[1].classList.add('active');
-            }
-
-            document.getElementById('tab-' + tabId).classList.add('active');
-        }
-
         // Particles setup
         (function () {
             const container = document.getElementById('particles');
@@ -864,91 +851,71 @@
             }
         })();
 
-        // ── DEADLINE CONFIG ──
-        // ✏️ Ubah tanggal di bawah ini untuk mengatur deadline submission.
-        // Format: 'YYYY-MM-DDTHH:MM:SSZ' (UTC) — WIB (UTC+7) = kurangi 7 jam
-        // Contoh: 15 Juli 2026 23:59 WIB = '2026-07-15T16:59:00Z'
-        const DEADLINE_UTC = new Date('2026-07-15T16:59:00Z').getTime(); // 23:59 WIB = 16:59 UTC
+        // ── FULLPAPER DEADLINE CONFIG ──
+        // 5 Agustus 2026 23:59 WIB = 16:59 UTC
+        const FP_DEADLINE_UTC = new Date('2026-08-05T16:59:00Z').getTime();
+        const FP_DEADLINE_LABEL = '5 Agustus 2026, 23:59 WIB';
 
-        // Label deadline yang ditampilkan di UI (sesuaikan jika ubah deadline)
-        const DEADLINE_LABEL = '15 Juli 2026, 23:59 WIB';
+        // Fullpaper Supabase config (berbeda dari abstrak)
+        const FP_SUPABASE_URL = "https://fovwlxqoiotbrkdwtlnr.supabase.co";
+        const FP_SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZvdndseHFvaW90YnJrZHd0bG5yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQzODIzMjIsImV4cCI6MjA5OTk1ODMyMn0.Hf3gQUx7P3SZJOl-ZsF3s6UYJT7-zQti6z-lNxvseAg";
+        window._fpDbClientRef = supabase.createClient(FP_SUPABASE_URL, FP_SUPABASE_ANON_KEY);
 
-        // Set label deadline di halaman
-        document.addEventListener('DOMContentLoaded', function () {
-            const el = document.getElementById('deadlineText');
-            if (el) el.textContent = DEADLINE_LABEL;
-        });
+        let fpSubmissionOpen = true;
+        let fpCurrentDeadline = FP_DEADLINE_UTC;
 
-        // State global — null berarti koneksi DB dimatikan
-        let submissionOpen = true;
-        let countdownInterval = null;
+        function getFpDbClient() {
+            if (!fpSubmissionOpen || !window._fpDbClientRef) {
+                throw new Error('Submission Fullpaper telah ditutup. Koneksi database tidak tersedia.');
+            }
+            return window._fpDbClientRef;
+        }
 
-        // ── TUTUP SUBMISSION ──
-        function closeSubmission() {
-            if (!submissionOpen) return; // Sudah ditutup sebelumnya
-            submissionOpen = false;
+        // ── TUTUP SUBMISSION FULLPAPER ──
+        function closeFpSubmission() {
+            if (!fpSubmissionOpen) return;
+            fpSubmissionOpen = false;
 
-            // 1. Nullify dbClient untuk memutus koneksi ke database dari sisi client
-            try { window._dbClientRef = null; } catch (_) { }
-            // Overwrite fungsi upload agar selalu gagal jika ada yang mencoba call manual
-            window.uploadFileToStorage = async () => { throw new Error('Submission telah ditutup.'); };
+            try { window._fpDbClientRef = null; } catch (_) { }
 
-            // 2. Tampilkan overlay "Submission Ditutup"
-            const overlay = document.getElementById('submissionClosedOverlay');
-            const formContainer = document.getElementById('formMainContainer');
+            const overlay = document.getElementById('fpSubmissionClosedOverlay');
+            const formContainer = document.getElementById('fpFormMainContainer');
             if (overlay) overlay.classList.add('visible');
             if (formContainer) formContainer.style.display = 'none';
 
-            // 3. Tandai countdown sebagai expired
-            const cdBox = document.querySelector('.countdown-box');
+            const cdBox = document.getElementById('countdownBoxFullpaper');
             if (cdBox) cdBox.classList.add('expired');
         }
 
-        // ── BUKA KEMBALI SUBMISSION ──
-        // Panggil fungsi ini untuk membuka kembali submission dengan deadline baru.
-        // Contoh penggunaan dari console: openSubmission(new Date('2026-07-20T16:59:00Z').getTime())
-        function openSubmission(newDeadlineUTC) {
-            // Reset state
-            submissionOpen = true;
-
-            // Pulihkan dbClient
-            if (!window._dbClientRef) {
-                window._dbClientRef = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        // ── BUKA KEMBALI SUBMISSION FULLPAPER ──
+        function openFpSubmission(newDeadlineUTC) {
+            fpSubmissionOpen = true;
+            if (!window._fpDbClientRef) {
+                window._fpDbClientRef = supabase.createClient(FP_SUPABASE_URL, FP_SUPABASE_ANON_KEY);
             }
 
-            // Pulihkan fungsi uploadFileToStorage ke versi asli
-            window.uploadFileToStorage = uploadFileToStorage;
-
-            // Sembunyikan overlay & tampilkan form kembali
-            const overlay = document.getElementById('submissionClosedOverlay');
-            const formContainer = document.getElementById('formMainContainer');
+            const overlay = document.getElementById('fpSubmissionClosedOverlay');
+            const formContainer = document.getElementById('fpFormMainContainer');
             if (overlay) overlay.classList.remove('visible');
             if (formContainer) formContainer.style.display = '';
 
-            // Hapus status expired dari countdown
-            const cdBox = document.querySelector('.countdown-box');
+            const cdBox = document.getElementById('countdownBoxFullpaper');
             if (cdBox) cdBox.classList.remove('expired');
 
-            // Update deadline jika diberikan
             if (newDeadlineUTC) {
-                currentDeadline = newDeadlineUTC;
+                fpCurrentDeadline = newDeadlineUTC;
             }
-
-            console.log('✅ Submission telah dibuka kembali. Deadline baru:', new Date(currentDeadline).toLocaleString('id-ID', { timeZone: 'Asia/Jakarta' }));
+            console.log('✅ Submission Fullpaper telah dibuka kembali. Deadline baru:', new Date(fpCurrentDeadline).toLocaleString('id-ID', { timeZone: 'Asia/Jakarta' }));
         }
 
-        // Deadline aktif (bisa diubah oleh openSubmission)
-        let currentDeadline = DEADLINE_UTC;
-
-        // ── COUNTDOWN ──
-        function updateCountdown() {
+        // ── COUNTDOWN FULLPAPER ──
+        function updateFpCountdown() {
             const now = Date.now();
-            let diff = currentDeadline - now;
+            let diff = fpCurrentDeadline - now;
 
             if (diff <= 0) {
                 diff = 0;
-                // Tutup submission ketika countdown habis
-                closeSubmission();
+                closeFpSubmission();
             }
 
             const days = Math.floor(diff / 86400000);
@@ -956,71 +923,61 @@
             const mins = Math.floor((diff % 3600000) / 60000);
             const secs = Math.floor((diff % 60000) / 1000);
             const fmt = n => String(n).padStart(2, '0');
-            document.getElementById('cd-days').textContent = fmt(days);
-            document.getElementById('cd-hours').textContent = fmt(hours);
-            document.getElementById('cd-mins').textContent = fmt(mins);
-            document.getElementById('cd-secs').textContent = fmt(secs);
+
+            const daysEl = document.getElementById('fp-cd-days');
+            const hoursEl = document.getElementById('fp-cd-hours');
+            const minsEl = document.getElementById('fp-cd-mins');
+            const secsEl = document.getElementById('fp-cd-secs');
+
+            if (daysEl) daysEl.textContent = fmt(days);
+            if (hoursEl) hoursEl.textContent = fmt(hours);
+            if (minsEl) minsEl.textContent = fmt(mins);
+            if (secsEl) secsEl.textContent = fmt(secs);
         }
-        updateCountdown();
-        setInterval(updateCountdown, 1000);
-
-        // Konfigurasi Supabase
-        const SUPABASE_URL = "https://hikhodkteetrfzswklxs.supabase.co";
-        const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imhpa2hvZGt0ZWV0cmZ6c3drbHhzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODEwOTU1MjksImV4cCI6MjA5NjY3MTUyOX0.M7vI2Am0NNeGUvITVUYQo50HE7rA7JR4XbAu6_n590M";
-        // dbClient disimpan di window._dbClientRef agar bisa di-nullify saat submission ditutup
-        window._dbClientRef = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-        const BUCKET_NAME = "file lomba";
-
-        // Getter dbClient — selalu cek apakah submission masih terbuka
-        function getDbClient() {
-            if (!submissionOpen || !window._dbClientRef) {
-                throw new Error('Submission telah ditutup. Koneksi database tidak tersedia.');
-            }
-            return window._dbClientRef;
-        }
-
-        // Fungsi Pembantu untuk Mengunggah File ke Storage
-        async function uploadFileToStorage(folderName, file) {
+        updateFpCountdown();
+        setInterval(updateFpCountdown, 1000);
+        // ── FUNGSI UPLOAD FULLPAPER ──
+        async function uploadFileToStorage(folderName, file, customNamePrefix) {
             if (!file) return null;
 
-            let originalName = file.name.replace(/\.[^/.]+$/, ''); // nama tanpa ekstensi
-            // Hapus karakter spesial yang bisa merusak URL (seperti ?, #, %, dll) tapi biarkan spasi
+            let originalName = file.name.replace(/\.[^/.]+$/, ''); 
+            // Bersihkan nama file dari karakter khusus
             originalName = originalName.replace(/[^a-zA-Z0-9\-_ ]/g, '_');
             const fileExt = file.name.split('.').pop();
-            const timestamp = new Date().toISOString().replace(/[:.]/g, '-'); // format aman untuk path
-            const fileName = `${originalName}_${timestamp}.${fileExt}`;
+            const timestamp = new Date().toISOString().replace(/[:.]/g, '-'); 
+            const fileName = `${customNamePrefix}_${originalName}_${timestamp}.${fileExt}`;
             const filePath = `${folderName}/${fileName}`;
 
-            const client = getDbClient(); // Akan throw jika submission ditutup
+            const client = getFpDbClient();
             const { data, error } = await client.storage
-                .from(BUCKET_NAME)
+                .from('file_fullpaper')
                 .upload(filePath, file, {
                     cacheControl: '3600',
                     upsert: true
                 });
 
-            if (error) throw new Error(`Gagal upload berkas ${folderName}: ${error.message}`);
+            if (error) throw new Error(`Gagal upload berkas: ${error.message}`);
 
             const { data: urlData } = client.storage
-                .from(BUCKET_NAME)
+                .from('file_fullpaper')
                 .getPublicUrl(filePath);
 
             return urlData.publicUrl;
         }
 
-        // Fungsi utama pengiriman form
-        document.getElementById('submissionForm').addEventListener('submit', async function (e) {
-            e.preventDefault(); // Mencegah halaman refresh
+        // ── FORM SUBMIT FULLPAPER ──
+        document.getElementById('fullpaperForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
 
-            const btnSubmit = document.getElementById('btnSubmit');
-            const statusDiv = document.getElementById('status');
-            const btnProgress = document.getElementById('btnProgress');
-            const btnText = document.getElementById('btnText');
+            const btnSubmit = document.getElementById('fpBtnSubmit');
+            const statusDiv = document.getElementById('fpStatus');
+            const btnProgress = document.getElementById('fpBtnProgress');
+            const btnText = document.getElementById('fpBtnText');
 
-            // ── LAPISAN KEAMANAN 1 (CLIENT): Cek status submission dari state lokal ──
-            if (!submissionOpen) {
+            // Cek status submission
+            if (!fpSubmissionOpen) {
                 statusDiv.style.color = '#FF3333';
-                statusDiv.innerText = '⛔ Submission telah ditutup. Batas waktu pengumpulan telah berakhir.';
+                statusDiv.innerText = '⛔ Submission Fullpaper telah ditutup. Batas waktu pengumpulan telah berakhir.';
                 return;
             }
 
@@ -1030,23 +987,20 @@
             statusDiv.style.color = '#CCAA88';
             statusDiv.innerText = 'Memverifikasi waktu server...';
 
-            // ── LAPISAN KEAMANAN 2 (SERVER): Cek waktu dari server Supabase ──
-            // Ini TIDAK BISA di-bypass melalui DevTools karena waktu diambil dari server.
+            // Verifikasi waktu server
             try {
-                const client = getDbClient();
+                const client = getFpDbClient();
                 const { data: timeData, error: timeError } = await client
                     .rpc('get_server_time');
 
                 if (timeError) {
-                    // Jika RPC belum dibuat, fallback ke pengecekan deadline UTC
-                    // Catatan: ini sebagai fallback saja; tambahkan RPC untuk keamanan penuh
-                    console.warn('RPC get_server_time tidak tersedia, menggunakan fallback.');
+                    console.warn('RPC get_server_time tidak tersedia untuk fullpaper, menggunakan fallback.');
                 } else {
                     const serverTime = new Date(timeData).getTime();
-                    if (serverTime > DEADLINE_UTC) {
-                        closeSubmission();
+                    if (serverTime > FP_DEADLINE_UTC) {
+                        closeFpSubmission();
                         statusDiv.style.color = '#FF3333';
-                        statusDiv.innerText = '⛔ Submission telah ditutup berdasarkan waktu server.';
+                        statusDiv.innerText = '⛔ Submission Fullpaper telah ditutup berdasarkan waktu server.';
                         btnSubmit.disabled = false;
                         btnText.innerText = 'Submission Ditutup';
                         return;
@@ -1065,7 +1019,7 @@
             statusDiv.innerText = 'Sedang mengunggah berkas ke server, mohon tunggu...';
 
             let progressValue = 0;
-            window.progressInterval = setInterval(() => {
+            window.fpProgressInterval = setInterval(() => {
                 if (progressValue < 90) {
                     progressValue += Math.random() * 10;
                     if (progressValue > 90) progressValue = 90;
@@ -1075,69 +1029,47 @@
             }, 300);
 
             try {
-                const fileKtm = document.getElementById('inputKtm').files[0];
-                const fileKarya = document.getElementById('inputKarya').files[0];
-                const fileTwibon = document.getElementById('inputTwibon').files[0];
-                const filePamflet = document.getElementById('inputPamflet').files[0];
-                const fileSosmed = document.getElementById('inputSosmed').files[0];
-                const fileOrisinalitas = document.getElementById('inputOrisinalitas').files[0];
+                const fileFullpaper = document.getElementById('fpFileFullpaper').files[0];
+                const rawNamaTim = document.getElementById('fpNamaTim').value;
+                const namaTimClean = rawNamaTim.replace(/[^a-zA-Z0-9 ]/g, ''); // Hilangkan karakter spesial
 
-                // Proses upload asinkron ke Supabase Storage secara paralel
-                const [
-                    urlKtm,
-                    urlKarya,
-                    urlTwibon,
-                    urlPamflet,
-                    urlSosmed,
-                    urlOrisinalitas
-                ] = await Promise.all([
-                    uploadFileToStorage('ktm', fileKtm),
-                    uploadFileToStorage('karya', fileKarya),
-                    uploadFileToStorage('twibon', fileTwibon),
-                    uploadFileToStorage('pamflet', filePamflet),
-                    uploadFileToStorage('sosmed', fileSosmed),
-                    uploadFileToStorage('orisinalitas', fileOrisinalitas)
-                ]);
+                const urlFullpaper = await uploadFileToStorage('fullpaper', fileFullpaper, 'Fullpaper');
 
                 statusDiv.innerText = 'Berkas terunggah! Memasukkan data ke database...';
-
-                // ── LAPISAN KEAMANAN 3 (SERVER): RLS Policy Supabase memblokir INSERT setelah deadline ──
-                // Policy ini dieksekusi di sisi Supabase, tidak bisa di-bypass dari browser.
-                // Memasukkan data ke database
-                const { data: insertData, error: insertError } = await getDbClient()
-                    .from('data_peserta_KTI')
+                const { data: insertData, error: insertError } = await getFpDbClient()
+                    .from('data_fullpaper')
                     .insert([
                         {
                             waktu_submit: new Date().toISOString(),
-                            nama_tim: document.getElementById('namaTim').value,
-                            asal_universitas: document.getElementById('asalUniv').value,
-                            nama_ketua_tim: document.getElementById('namaKetua').value,
-                            nim_ketua: document.getElementById('nimKetua').value,
-                            jurusan_ketua: document.getElementById('jurusanKetua').value,
-                            nama_anggota1: null,
-                            nim_anggota1: null,
-                            jurusan_anggota1: null,
-                            nama_anggota2: null,
-                            nim_anggota2: null,
-                            jurusan_anggota2: null,
-                            url_ktm: urlKtm,
-                            url_karya: urlKarya,
-                            bukti_upload_twibon: urlTwibon,
-                            bukti_share_pamflet: urlPamflet,
-                            bukti_follow_sosmed: urlSosmed,
-                            lembar_orisinalitas_karya: urlOrisinalitas
+                            nama_tim: namaTimClean,
+                            nomor_kelompok: document.getElementById('fpNomorKelompok').value,
+                            nama_dosen_pembimbing: document.getElementById('fpNamaDosenPembimbing').value,
+                            asal_universitas: document.getElementById('fpAsalUniv').value,
+                            nama_ketua: document.getElementById('fpNamaKetua').value,
+                            nim_ketua: document.getElementById('fpNimKetua').value,
+                            jurusan_ketua: document.getElementById('fpJurusanKetua').value,
+                            nomor_whatsapp_ketua: document.getElementById('fpWaKetua').value,
+                            nama_anggota1: document.getElementById('fpNamaAnggota1').value || null,
+                            nim_anggota1: document.getElementById('fpNimAnggota1').value || null,
+                            jurusan_anggota1: document.getElementById('fpJurusanAnggota1').value || null,
+                            nomor_whatsapp_anggota1: document.getElementById('fpWaAnggota1').value || null,
+                            nama_anggota2: document.getElementById('fpNamaAnggota2').value || null,
+                            nim_anggota2: document.getElementById('fpNimAnggota2').value || null,
+                            jurusan_anggota2: document.getElementById('fpJurusanAnggota2').value || null,
+                            nomor_whatsapp_anggota2: document.getElementById('fpWaAnggota2').value || null,
+                            url_fullpaper: urlFullpaper
                         }
                     ])
                     .select();
 
                 if (insertError) {
                     if (insertError.code === '23505') {
-                        throw new Error("Gagal: NIM Ketua ini sudah melakukan submission sebelumnya!");
+                        throw new Error("Gagal: Tim ini sudah melakukan submission fullpaper sebelumnya!");
                     }
                     throw new Error(insertError.message);
                 }
 
-                clearInterval(window.progressInterval);
+                clearInterval(window.fpProgressInterval);
                 btnProgress.style.width = '100%';
                 btnText.innerText = 'Selesai! 100%';
 
@@ -1145,11 +1077,11 @@
                 window.location.href = 'thankyou.html';
 
             } catch (error) {
-                clearInterval(window.progressInterval);
+                clearInterval(window.fpProgressInterval);
                 btnProgress.style.width = '0%';
-                btnText.innerText = 'Gagal Mengunggah';
-                console.error('Error:', error);
-                statusDiv.style.color = '#FF3333'; // red-fire
+                btnText.innerText = 'Gagal Mengirim';
+                console.error('Error Fullpaper:', error);
+                statusDiv.style.color = '#FF3333';
                 statusDiv.innerText = error.message || 'Terjadi kesalahan sistem, silakan coba lagi.';
             } finally {
                 btnSubmit.disabled = false;
