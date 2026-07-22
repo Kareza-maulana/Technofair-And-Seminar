@@ -833,6 +833,12 @@
                     <input type="file" id="fpFileFullpaper" accept=".pdf" required>
                 </div>
 
+                <div class="section-title">Upload Bukti Pembayaran</div>
+                <div class="form-group">
+                    <label>Upload Bukti Pembayaran (Format gambar atau PDF)</label>
+                    <input type="file" id="fpBuktiPembayaran" accept=".pdf,image/*" required>
+                </div>
+
                 <button type="submit" id="fpBtnSubmit">
                     <div id="fpBtnProgress" class="btn-progress-fill"></div>
                     <span id="fpBtnText">Kirim Submission</span>
@@ -1039,10 +1045,12 @@
 
             try {
                 const fileFullpaper = document.getElementById('fpFileFullpaper').files[0];
+                const fileBuktiPembayaran = document.getElementById('fpBuktiPembayaran').files[0];
                 const rawNamaTim = document.getElementById('fpNamaTim').value;
                 const namaTimClean = rawNamaTim.replace(/[^a-zA-Z0-9 ]/g, ''); // Hilangkan karakter spesial
 
                 const urlFullpaper = await uploadFileToStorage('fullpaper', fileFullpaper, 'Fullpaper');
+                const urlBuktiPembayaran = await uploadFileToStorage('bukti_payment', fileBuktiPembayaran, 'BuktiPayment');
 
                 statusDiv.innerText = 'Berkas terunggah! Memasukkan data ke database...';
                 const { data: insertData, error: insertError } = await getFpDbClient()
@@ -1066,7 +1074,8 @@
                             nim_anggota2: document.getElementById('fpNimAnggota2').value || null,
                             jurusan_anggota2: document.getElementById('fpJurusanAnggota2').value || null,
                             nomor_whatsapp_anggota2: document.getElementById('fpWaAnggota2').value || null,
-                            url_fullpaper: urlFullpaper
+                            url_fullpaper: urlFullpaper,
+                            url_bukti_payment: urlBuktiPembayaran
                         }
                     ])
                     .select();
