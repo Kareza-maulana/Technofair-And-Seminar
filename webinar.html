@@ -4,10 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Webinar TFS 2026 - Coming Soon</title>
+    <title>Webinar Nasional TFS 2026 — Architecting the Future</title>
+    <meta name="description" content="Webinar Nasional Technofair & Seminar 2026: Leveraging AI to Accelerate High-Caliber Digital Talents for Indonesia's Digital Sovereignty 2045">
     <link rel="icon" type="image/png" href="logotfs.PNG">
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        /* ===== DESIGN TOKENS ===== */
         :root {
             --red-deep: #8B0000;
             --red-bright: #CC2222;
@@ -18,175 +20,882 @@
             --orange-fire: #FF6B00;
             --bg-darkest: #070308;
             --bg-dark: #110508;
+            --bg-card: rgba(30, 8, 8, 0.85);
             --cyan-bright: #00E5FF;
             --white: #FFFFFF;
             --text-dim: #CCAA88;
+            --glass: rgba(255, 255, 255, 0.04);
+            --glass-border: rgba(255, 215, 0, 0.15);
         }
 
-        *, *::before, *::after {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        /* ===== RESET ===== */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
 
         body {
             background-color: var(--bg-darkest);
             color: var(--white);
             font-family: 'Rajdhani', sans-serif;
-            display: flex;
-            flex-direction: column;
             min-height: 100vh;
             overflow-x: hidden;
+            line-height: 1.6;
         }
 
+        /* ===== BACKGROUND FX ===== */
         body::before {
             content: '';
-            position: fixed;
-            inset: 0;
+            position: fixed; inset: 0;
             background:
-                radial-gradient(ellipse 80% 60% at 60% 40%, rgba(139, 0, 0, 0.45) 0%, transparent 70%),
-                radial-gradient(ellipse 60% 80% at 20% 70%, rgba(240, 165, 0, 0.15) 0%, transparent 60%),
+                radial-gradient(ellipse 80% 60% at 60% 40%, rgba(139,0,0,.45) 0%, transparent 70%),
+                radial-gradient(ellipse 60% 80% at 20% 70%, rgba(240,165,0,.15) 0%, transparent 60%),
                 linear-gradient(180deg, var(--bg-darkest) 0%, var(--bg-dark) 50%, var(--bg-darkest) 100%);
             z-index: -2;
         }
-
         .pixel-grid-bg {
-            position: fixed;
-            inset: 0;
+            position: fixed; inset: 0;
             background-image:
-                linear-gradient(rgba(255, 215, 0, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 215, 0, 0.03) 1px, transparent 1px);
+                linear-gradient(rgba(255,215,0,.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,215,0,.03) 1px, transparent 1px);
             background-size: 40px 40px;
             pointer-events: none;
             z-index: -1;
         }
 
+        /* ===== NAV ===== */
         nav {
-            position: fixed;
-            top: 0; left: 0; right: 0;
-            background: rgba(7, 3, 8, 0.92);
+            position: fixed; top: 0; left: 0; right: 0;
+            background: rgba(7,3,8,.92);
             backdrop-filter: blur(16px);
-            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+            border-bottom: 1px solid rgba(255,215,0,.2);
             padding: 14px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            display: flex; justify-content: space-between; align-items: center;
             z-index: 1000;
         }
-
         .nav-logo {
             font-family: 'Press Start 2P', monospace;
             font-size: 13px;
             background: linear-gradient(135deg, var(--gold-pure), var(--red-fire));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
             text-decoration: none;
         }
-
         .nav-back {
-            color: var(--text-dim);
-            text-decoration: none;
-            font-family: 'Press Start 2P', monospace;
-            font-size: 9px;
-            border: 1px solid var(--gold-warm);
-            padding: 8px 16px;
-            border-radius: 4px;
-            transition: all 0.3s;
+            color: var(--text-dim); text-decoration: none;
+            font-family: 'Press Start 2P', monospace; font-size: 9px;
+            border: 1px solid var(--gold-warm); padding: 8px 16px; border-radius: 4px;
+            transition: all .3s;
+        }
+        .nav-back:hover { background: rgba(240,165,0,.1); color: var(--gold-pure); }
+
+        /* ===== PAGE WRAPPER ===== */
+        .page-wrapper {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 100px 20px 60px;
         }
 
-        .nav-back:hover {
-            background: rgba(240, 165, 0, 0.1);
+        /* ===== TAB SYSTEM ===== */
+        .tabs {
+            display: flex; gap: 0;
+            margin-bottom: 40px;
+            border-bottom: 2px solid rgba(255,215,0,.15);
+            position: relative;
+        }
+        .tab-btn {
+            flex: 1;
+            background: none; border: none; cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 15px; font-weight: 700;
+            color: var(--text-dim);
+            padding: 16px 24px;
+            position: relative;
+            transition: color .35s, background .35s;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+        .tab-btn::after {
+            content: '';
+            position: absolute; bottom: -2px; left: 0; width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--cyan-bright), var(--gold-pure));
+            transform: scaleX(0);
+            transition: transform .4s cubic-bezier(.4,0,.2,1);
+        }
+        .tab-btn.active { color: var(--gold-pure); }
+        .tab-btn.active::after { transform: scaleX(1); }
+        .tab-btn:hover:not(.active) { color: rgba(255,215,0,.65); background: rgba(255,215,0,.04); }
+
+        .tab-content { display: none; animation: fadeTab .5s ease; }
+        .tab-content.active { display: block; }
+        @keyframes fadeTab {
+            from { opacity: 0; transform: translateY(18px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ===== HERO TITLE ===== */
+        .hero-title-section {
+            text-align: center;
+            margin-bottom: 52px;
+            animation: fadeInUp .8s ease both;
+        }
+        .hero-badge {
+            display: inline-block;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 10px;
+            color: var(--cyan-bright);
+            border: 1px solid rgba(0,229,255,.3);
+            padding: 6px 18px;
+            border-radius: 30px;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+            background: rgba(0,229,255,.06);
+            text-transform: uppercase;
+        }
+        .hero-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(20px, 3.2vw, 34px);
+            font-weight: 900;
+            line-height: 1.35;
+            background: linear-gradient(135deg, var(--gold-pure) 0%, var(--white) 40%, var(--cyan-bright) 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            margin-bottom: 14px;
+            max-width: 900px;
+            margin-left: auto; margin-right: auto;
+        }
+        .hero-subtitle {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 17px;
+            color: var(--text-dim);
+            max-width: 650px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+
+        /* ===== SPEAKERS ===== */
+        .speakers-heading {
+            text-align: center;
+            margin-bottom: 36px;
+        }
+        .speakers-heading h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 22px; font-weight: 700;
+            color: var(--gold-pure);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        .speakers-heading .line {
+            width: 60px; height: 3px;
+            background: linear-gradient(90deg, var(--cyan-bright), var(--gold-pure));
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        .speakers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 32px;
+            margin-bottom: 56px;
+        }
+
+        .speaker-card {
+            background: var(--bg-card);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+            transition: transform .4s ease, box-shadow .4s ease;
+            animation: fadeInUp .7s ease both;
+        }
+        .speaker-card:nth-child(2) { animation-delay: .15s; }
+        .speaker-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 18px 48px rgba(255,215,0,.08), 0 0 0 1px rgba(255,215,0,.2);
+        }
+        .speaker-card::before {
+            content: '';
+            position: absolute; top: 0; left: 0; right: 0; height: 3px;
+            background: linear-gradient(90deg, var(--cyan-bright), var(--gold-pure));
+        }
+
+        .speaker-photo-wrap {
+            width: 100%; height: 500px;
+            overflow: hidden;
+            position: relative;
+            background: rgba(0,0,0,.4);
+        }
+        .speaker-photo-wrap::after {
+            content: '';
+            position: absolute; bottom: 0; left: 0; right: 0; height: 80px;
+            background: linear-gradient(to top, var(--bg-card), transparent);
+        }
+        .speaker-photo-wrap img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            object-position: top center;
+            transition: transform .6s ease;
+        }
+        .speaker-card:hover .speaker-photo-wrap img { transform: scale(1.05); }
+
+        .speaker-role-badge {
+            position: absolute;
+            top: 16px; left: 16px;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 8px;
+            padding: 5px 12px;
+            border-radius: 20px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            z-index: 2;
+        }
+        .badge-pemateri {
+            background: rgba(0,229,255,.15);
+            border: 1px solid rgba(0,229,255,.4);
+            color: var(--cyan-bright);
+        }
+        .badge-motivator {
+            background: rgba(255,215,0,.15);
+            border: 1px solid rgba(255,215,0,.4);
             color: var(--gold-pure);
         }
 
-        .main-content {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 100px 20px;
+        .speaker-info {
+            padding: 24px 28px 28px;
         }
-
-        .coming-soon-card {
-            background: linear-gradient(145deg, rgba(30, 8, 8, 0.9), rgba(18, 5, 5, 0.95));
-            border: 1px solid rgba(255, 215, 0, 0.2);
-            border-radius: 8px;
-            padding: 60px 40px;
-            text-align: center;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-            max-width: 600px;
-            width: 100%;
-            position: relative;
-            animation: fadeInUp 0.8s ease both;
+        .speaker-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 18px; font-weight: 700;
+            color: var(--white);
+            margin-bottom: 4px;
         }
-
-        .coming-soon-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--cyan-bright), var(--gold-pure));
-            border-top-left-radius: 8px;
-            border-top-right-radius: 8px;
-        }
-
-        .cs-icon {
-            font-size: 64px;
-            margin-bottom: 24px;
-            filter: drop-shadow(0 0 20px rgba(0, 229, 255, 0.4));
-            animation: floatIcon 3s ease-in-out infinite;
-        }
-
-        @keyframes floatIcon {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        .cs-title {
-            font-family: 'Press Start 2P', monospace;
-            font-size: 24px;
-            background: linear-gradient(135deg, var(--white), var(--cyan-bright));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .speaker-title-role {
+            font-size: 14px; font-weight: 500;
+            color: var(--gold-warm);
             margin-bottom: 16px;
-            line-height: 1.4;
+        }
+
+        .speaker-credentials {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+        .speaker-credentials li {
+            font-size: 13.5px;
+            color: rgba(255,255,255,.72);
+            padding: 4px 0 4px 20px;
+            position: relative;
+            line-height: 1.45;
+        }
+        .speaker-credentials li::before {
+            content: '▸';
+            position: absolute; left: 0;
+            color: var(--cyan-bright);
+            font-size: 12px;
+        }
+
+        .speaker-topic {
+            background: rgba(255,255,255,.04);
+            border: 1px solid rgba(255,215,0,.12);
+            border-radius: 10px;
+            padding: 14px 18px;
+        }
+        .speaker-topic-label {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 7px;
+            color: var(--text-dim);
             letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+        .speaker-topic-text {
+            font-size: 14.5px;
+            color: var(--gold-pure);
+            font-weight: 600;
+            line-height: 1.4;
+            font-style: italic;
         }
 
-        .cs-desc {
+        /* ===== BENEFITS ===== */
+        .benefits-section {
+            margin-top: 10px;
+            animation: fadeInUp .8s ease .3s both;
+        }
+        .benefits-heading {
+            text-align: center;
+            margin-bottom: 36px;
+        }
+        .benefits-heading h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 22px; font-weight: 700;
+            color: var(--gold-pure);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        .benefits-heading .line {
+            width: 60px; height: 3px;
+            background: linear-gradient(90deg, var(--gold-pure), var(--red-fire));
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 22px;
+        }
+        .benefit-card:nth-child(1) { grid-column: 1 / 3; }
+        .benefit-card:nth-child(2) { grid-column: 3 / 5; }
+        .benefit-card:nth-child(3) { grid-column: 5 / 7; }
+        .benefit-card:nth-child(4) { grid-column: 2 / 4; }
+        .benefit-card:nth-child(5) { grid-column: 4 / 6; }
+        .benefit-card {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 14px;
+            padding: 28px 22px;
+            text-align: center;
+            transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+            animation: fadeInUp .6s ease both;
+        }
+        .benefit-card:nth-child(2) { animation-delay: .08s; }
+        .benefit-card:nth-child(3) { animation-delay: .16s; }
+        .benefit-card:nth-child(4) { animation-delay: .24s; }
+        .benefit-card:nth-child(5) { animation-delay: .32s; }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 36px rgba(255,215,0,.07);
+            border-color: rgba(255,215,0,.3);
+        }
+        .benefit-icon {
+            font-size: 40px;
+            margin-bottom: 14px;
+            filter: drop-shadow(0 0 12px rgba(0,229,255,.25));
+        }
+        .benefit-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 13px; font-weight: 700;
+            color: var(--gold-pure);
+            margin-bottom: 8px;
+            letter-spacing: .5px;
+        }
+        .benefit-desc {
+            font-size: 13.5px;
+            color: rgba(255,255,255,.65);
+            line-height: 1.45;
+        }
+
+        /* ===== REGISTRATION FORM ===== */
+        .reg-form-wrapper {
+            max-width: 720px;
+            margin: 0 auto;
+            animation: fadeInUp .7s ease both;
+        }
+        .reg-form-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .reg-form-header h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 24px; font-weight: 900;
+            background: linear-gradient(135deg, var(--gold-pure), var(--white), var(--cyan-bright));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+        .reg-form-header p {
+            font-size: 15px;
+            color: var(--text-dim);
+        }
+        .reg-form-header .line {
+            width: 60px; height: 3px;
+            background: linear-gradient(90deg, var(--cyan-bright), var(--gold-pure));
+            margin: 14px auto 0;
+            border-radius: 2px;
+        }
+
+        .reg-form {
+            background: var(--bg-card);
+            border: 1px solid var(--glass-border);
+            border-radius: 18px;
+            padding: 40px 36px;
+            position: relative;
+            overflow: hidden;
+        }
+        .reg-form::before {
+            content: '';
+            position: absolute; top: 0; left: 0; right: 0; height: 3px;
+            background: linear-gradient(90deg, var(--cyan-bright), var(--gold-pure), var(--red-fire));
+        }
+
+        /* Section dividers */
+        .form-section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 13px; font-weight: 700;
+            color: var(--cyan-bright);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin: 32px 0 18px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(0,229,255,.15);
+            display: flex; align-items: center; gap: 10px;
+        }
+        .form-section-title:first-child { margin-top: 0; }
+        .form-section-title .sec-icon { font-size: 16px; }
+
+        /* Field groups */
+        .form-group {
+            margin-bottom: 22px;
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+        .form-label {
+            display: block;
             font-family: 'Rajdhani', sans-serif;
-            font-size: 18px;
-            color: rgba(255, 255, 255, 0.7);
-            line-height: 1.6;
+            font-size: 14px; font-weight: 600;
+            color: rgba(255,255,255,.85);
+            margin-bottom: 7px;
+            letter-spacing: .4px;
+        }
+        .form-label .required {
+            color: var(--red-fire);
+            margin-left: 2px;
+        }
+        .form-hint {
+            font-size: 12px;
+            color: var(--text-dim);
+            margin-top: 5px;
+            line-height: 1.35;
         }
 
+        /* Text inputs */
+        .form-input {
+            width: 100%;
+            background: rgba(255,255,255,.04);
+            border: 1px solid rgba(255,215,0,.15);
+            border-radius: 10px;
+            padding: 13px 16px;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 15px;
+            color: var(--white);
+            transition: border-color .3s, box-shadow .3s, background .3s;
+            outline: none;
+        }
+        .form-input::placeholder {
+            color: rgba(255,255,255,.28);
+        }
+        .form-input:focus {
+            border-color: var(--cyan-bright);
+            box-shadow: 0 0 0 3px rgba(0,229,255,.1), 0 0 20px rgba(0,229,255,.06);
+            background: rgba(255,255,255,.06);
+        }
+        .form-input:hover:not(:focus) {
+            border-color: rgba(255,215,0,.3);
+        }
+
+        /* File upload zones */
+        .upload-zone {
+            width: 100%;
+            border: 2px dashed rgba(255,215,0,.2);
+            border-radius: 12px;
+            padding: 24px 16px;
+            text-align: center;
+            cursor: pointer;
+            transition: border-color .3s, background .3s, transform .2s;
+            background: rgba(255,255,255,.02);
+            position: relative;
+            overflow: hidden;
+        }
+        .upload-zone:hover {
+            border-color: var(--gold-warm);
+            background: rgba(255,215,0,.04);
+            transform: translateY(-1px);
+        }
+        .upload-zone.dragover {
+            border-color: var(--cyan-bright);
+            background: rgba(0,229,255,.06);
+        }
+        .upload-zone.has-file {
+            border-color: rgba(0,229,255,.4);
+            border-style: solid;
+            background: rgba(0,229,255,.04);
+        }
+        .upload-zone input[type="file"] {
+            position: absolute; inset: 0;
+            opacity: 0; cursor: pointer;
+            width: 100%; height: 100%;
+        }
+        .upload-icon {
+            font-size: 32px;
+            margin-bottom: 8px;
+            filter: drop-shadow(0 0 8px rgba(255,215,0,.2));
+        }
+        .upload-text {
+            font-size: 14px;
+            color: rgba(255,255,255,.55);
+            line-height: 1.4;
+        }
+        .upload-text strong {
+            color: var(--gold-pure);
+            font-weight: 600;
+        }
+        .upload-filename {
+            display: none;
+            margin-top: 8px;
+            font-size: 13px;
+            color: var(--cyan-bright);
+            font-weight: 600;
+            word-break: break-all;
+        }
+        .upload-zone.has-file .upload-filename { display: block; }
+        .upload-zone.has-file .upload-text { color: rgba(255,255,255,.4); font-size: 12px; }
+
+        /* Submit button */
+        .form-submit-wrap {
+            margin-top: 36px;
+            text-align: center;
+        }
+        .btn-submit {
+            display: inline-flex; align-items: center; gap: 10px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 14px; font-weight: 700;
+            letter-spacing: 2px; text-transform: uppercase;
+            color: var(--bg-darkest);
+            background: linear-gradient(135deg, var(--gold-pure), var(--gold-warm));
+            border: none; border-radius: 10px;
+            padding: 16px 48px;
+            cursor: pointer;
+            position: relative; overflow: hidden;
+            transition: transform .3s, box-shadow .3s;
+        }
+        .btn-submit::before {
+            content: '';
+            position: absolute; inset: 0;
+            background: linear-gradient(135deg, var(--cyan-bright), var(--gold-pure));
+            opacity: 0; transition: opacity .4s;
+        }
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(255,215,0,.3);
+        }
+        .btn-submit:hover::before { opacity: 1; }
+        .btn-submit span { position: relative; z-index: 1; }
+        .btn-submit:active { transform: translateY(0); }
+
+        .form-footer-note {
+            text-align: center;
+            margin-top: 18px;
+            font-size: 12.5px;
+            color: var(--text-dim);
+        }
+
+        /* ===== ANIMATIONS ===== */
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+            to   { opacity: 1; transform: translateY(0); }
         }
 
-        @media (max-width: 600px) {
-            .cs-title { font-size: 18px; }
-            .coming-soon-card { padding: 40px 20px; }
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .page-wrapper { padding: 90px 14px 40px; }
+            .tab-btn { font-size: 12px; padding: 14px 10px; letter-spacing: 1px; }
+            .hero-title { font-size: clamp(17px, 5vw, 24px); }
+            .hero-badge { font-size: 8px; }
+            .speakers-grid { grid-template-columns: 1fr; gap: 24px; }
+            .speaker-photo-wrap { height: 240px; }
+            .benefits-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+            .benefit-card:nth-child(n) { grid-column: auto; }
+            nav { padding: 12px 18px; }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title { font-size: 16px; }
+            .hero-subtitle { font-size: 14px; }
+            .tab-btn { font-size: 10px; padding: 12px 8px; }
+            .speaker-name { font-size: 16px; }
+            .speaker-photo-wrap { height: 200px; }
+            .benefits-grid { grid-template-columns: 1fr; }
+            .benefit-card:nth-child(n) { grid-column: auto; }
+            .benefit-card { padding: 20px 14px; }
+            .form-row { grid-template-columns: 1fr; gap: 0; }
+            .reg-form { padding: 28px 18px; }
+            .reg-form-header h2 { font-size: 18px; }
         }
     </style>
 </head>
 
 <body>
     <div class="pixel-grid-bg"></div>
-    
+
+    <!-- NAV -->
     <nav>
         <a href="index.html" class="nav-logo">TFS 2026</a>
         <a href="index.html" class="nav-back">&#9664; KEMBALI</a>
     </nav>
 
-    <div class="main-content">
-        <div class="coming-soon-card">
-            <div class="cs-icon">&#128640;</div>
-            <h1 class="cs-title">COMING SOON</h1>
-            <p class="cs-desc">Halaman Webinar masih dalam tahap pengembangan. Nantikan informasi lebih lanjut seputar Webinar Nasional TFS 2026!</p>
+    <div class="page-wrapper">
+
+        <!-- TABS -->
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="informasi" id="tab-informasi-btn">📋 Informasi</button>
+            <button class="tab-btn" data-tab="pendaftaran" id="tab-pendaftaran-btn">📝 Pendaftaran</button>
         </div>
-    </div>
+
+        <!-- ==================== TAB: INFORMASI ==================== -->
+        <div class="tab-content active" id="tab-informasi">
+
+            <!-- HERO TITLE -->
+            <section class="hero-title-section">
+                <span class="hero-badge">🎙️ Webinar Nasional TFS 2026</span>
+                <h1 class="hero-title">Architecting the Future: Leveraging AI to Accelerate High-Caliber Digital Talents for Indonesia's Digital Sovereignty 2045</h1>
+                <p class="hero-subtitle">Webinar nasional menghadirkan pakar industri AI dan mahasiswa berprestasi untuk membahas akselerasi talenta digital menuju Indonesia Emas 2045.</p>
+            </section>
+
+            <!-- SPEAKERS -->
+            <div class="speakers-heading">
+                <h2>Narasumber</h2>
+                <div class="line"></div>
+            </div>
+
+            <div class="speakers-grid">
+
+                <!-- CARD 1 — ALIBABA -->
+                <article class="speaker-card" id="speaker-alibaba">
+                    <span class="speaker-role-badge badge-pemateri">Pemateri</span>
+                    <div class="speaker-photo-wrap">
+                        <img src="alibaba.jpeg" alt="M. Ziaelfikar Albaba — Pemateri Webinar TFS 2026" loading="lazy">
+                    </div>
+                    <div class="speaker-info">
+                        <h3 class="speaker-name">M. Ziaelfikar Albaba</h3>
+                        <p class="speaker-title-role">CEO & Founder Nortis AI Academy</p>
+                        <ul class="speaker-credentials">
+                            <li>Ketua Umum STASION (Komunitas Startup Malang)</li>
+                            <li>Co-Founder & Director Indiekraf Indonesia</li>
+                            <li>Former Lead of IndigoSpace Malang</li>
+                            <li>Praktisi & Mentor Startup Digital & AI Integration</li>
+                        </ul>
+                        <div class="speaker-topic">
+                            <div class="speaker-topic-label">Tema Materi</div>
+                            <p class="speaker-topic-text">"Menjembatani AI & Kebutuhan Industri untuk Akselerasi Talenta Digital Masa Depan"</p>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- CARD 2 — ALEXANDER -->
+                <article class="speaker-card" id="speaker-alexander">
+                    <span class="speaker-role-badge badge-motivator">Motivator</span>
+                    <div class="speaker-photo-wrap">
+                        <img src="alexander.jpeg" alt="Alexander Imanuel Widjanarko — Motivator Webinar TFS 2026" loading="lazy">
+                    </div>
+                    <div class="speaker-info">
+                        <h3 class="speaker-name">Alexander Imanuel Widjanarko</h3>
+                        <p class="speaker-title-role">Mawapres Utama Universitas Brawijaya 2026</p>
+                        <ul class="speaker-credentials">
+                            <li>Finalis Clash of Champions (CoC) Season 3 by Ruangguru</li>
+                            <li>Finalis Nasional LIDM (Puspresnas) & Winner Int'l Business Plan 2025</li>
+                            <li>Peneliti Muda Implementasi AI (YOLOv8 & Adaptive Chatbot)</li>
+                        </ul>
+                        <div class="speaker-topic">
+                            <div class="speaker-topic-label">Tema Materi</div>
+                            <p class="speaker-topic-text">"Membangun Mindset & Potensi Diri Menuju Indonesia Emas 2045"</p>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+
+            <!-- BENEFITS -->
+            <section class="benefits-section">
+                <div class="benefits-heading">
+                    <h2>Benefit Peserta</h2>
+                    <div class="line"></div>
+                </div>
+                <div class="benefits-grid">
+                    <div class="benefit-card">
+                        <div class="benefit-icon">📜</div>
+                        <div class="benefit-title">E-Sertifikat Nasional</div>
+                        <p class="benefit-desc">Sertifikat resmi dari institusi untuk memperkuat Portofolio & CV kamu.</p>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="benefit-icon">🧠</div>
+                        <div class="benefit-title">Perspektif Industri AI</div>
+                        <p class="benefit-desc">Pahami skills AI & teknologi pintar yang paling dicari oleh dunia kerja.</p>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="benefit-icon">🔥</div>
+                        <div class="benefit-title">Motivasi & Growth Mindset</div>
+                        <p class="benefit-desc">Strategi berprestasi, time management, dan upgrade diri dari Mahasiswa Berprestasi Utama.</p>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="benefit-icon">🎁</div>
+                        <div class="benefit-title">Special Doorprize</div>
+                        <p class="benefit-desc">Kesempatan membawa pulang e-wallet & akses kelas online menarik selama acara.</p>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="benefit-icon">🌐</div>
+                        <div class="benefit-title">Jejaring Komunitas</div>
+                        <p class="benefit-desc">Terhubung dengan ratusan mahasiswa & inovator muda se-Indonesia.</p>
+                    </div>
+                </div>
+            </section>
+
+        </div><!-- /tab-informasi -->
+
+        <!-- ==================== TAB: PENDAFTARAN ==================== -->
+        <div class="tab-content" id="tab-pendaftaran">
+            <div class="reg-form-wrapper">
+
+                <div class="reg-form-header">
+                    <h2>Form Pendaftaran Webinar</h2>
+                    <p>Lengkapi data diri dan persyaratan berikut untuk mendaftar Webinar Nasional TFS 2026</p>
+                    <div class="line"></div>
+                </div>
+
+                <form class="reg-form" id="webinar-reg-form" action="#" method="POST" enctype="multipart/form-data">
+
+                    <!-- ── DATA DIRI ── -->
+                    <div class="form-section-title"><span class="sec-icon">👤</span> Data Diri</div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="nama">Nama Lengkap <span class="required">*</span></label>
+                        <input class="form-input" type="text" id="nama" name="nama" placeholder="Masukkan nama lengkap" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="instansi">Asal Instansi <span class="required">*</span></label>
+                            <input class="form-input" type="text" id="instansi" name="instansi" placeholder="Universitas / Politeknik / dsb." required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="jurusan">Jurusan <span class="required">*</span></label>
+                            <input class="form-input" type="text" id="jurusan" name="jurusan" placeholder="Contoh: Teknik Informatika" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="email">Email <span class="required">*</span></label>
+                            <input class="form-input" type="email" id="email" name="email" placeholder="email@contoh.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="whatsapp">Nomor WhatsApp <span class="required">*</span></label>
+                            <input class="form-input" type="tel" id="whatsapp" name="whatsapp" placeholder="08xxxxxxxxxx" required>
+                        </div>
+                    </div>
+
+                    <!-- ── BUKTI PERSYARATAN ── -->
+                    <div class="form-section-title"><span class="sec-icon">📎</span> Bukti Persyaratan</div>
+
+                    <!-- Twibbon -->
+                    <div class="form-group">
+                        <label class="form-label" for="upload-twibbon">Bukti Unggahan Twibbon <span class="required">*</span></label>
+                        <div class="upload-zone" id="zone-twibbon">
+                            <input type="file" id="upload-twibbon" name="bukti_twibbon" accept="image/*" required>
+                            <div class="upload-icon">🖼️</div>
+                            <p class="upload-text">Drag & drop atau <strong>klik untuk upload</strong></p>
+                            <p class="upload-filename" id="fname-twibbon"></p>
+                        </div>
+                        <p class="form-hint">Screenshot / bukti upload twibbon di media sosial (format gambar, maks 5MB)</p>
+                    </div>
+
+                    <!-- Share Pamflet -->
+                    <div class="form-group">
+                        <label class="form-label" for="upload-pamflet">Bukti Share Pamflet ke 3 Grup WhatsApp <span class="required">*</span></label>
+                        <div class="upload-zone" id="zone-pamflet">
+                            <input type="file" id="upload-pamflet" name="bukti_pamflet" accept="image/*" required>
+                            <div class="upload-icon">📢</div>
+                            <p class="upload-text">Drag & drop atau <strong>klik untuk upload</strong></p>
+                            <p class="upload-filename" id="fname-pamflet"></p>
+                        </div>
+                        <p class="form-hint">Gabungkan 3 screenshot share pamflet menjadi 1 gambar (format gambar, maks 5MB)</p>
+                    </div>
+
+                    <!-- Bukti Pembayaran -->
+                    <div class="form-group">
+                        <label class="form-label" for="upload-payment">Bukti Pembayaran Rp 10.000 <span class="required">*</span></label>
+                        <div class="upload-zone" id="zone-payment">
+                            <input type="file" id="upload-payment" name="bukti_pembayaran" accept="image/*" required>
+                            <div class="upload-icon">💳</div>
+                            <p class="upload-text">Drag & drop atau <strong>klik untuk upload</strong></p>
+                            <p class="upload-filename" id="fname-payment"></p>
+                        </div>
+                        <p class="form-hint">Screenshot bukti transfer sebesar Rp 10.000 (format gambar, maks 5MB)</p>
+                    </div>
+
+                    <!-- Follow Instagram -->
+                    <div class="form-group">
+                        <label class="form-label" for="upload-ig">Bukti Follow Instagram @tfs_polinema & @ukmpp_polinema <span class="required">*</span></label>
+                        <div class="upload-zone" id="zone-ig">
+                            <input type="file" id="upload-ig" name="bukti_follow_ig" accept="image/*" required>
+                            <div class="upload-icon">📸</div>
+                            <p class="upload-text">Drag & drop atau <strong>klik untuk upload</strong></p>
+                            <p class="upload-filename" id="fname-ig"></p>
+                        </div>
+                        <p class="form-hint">Screenshot bukti sudah follow kedua akun Instagram (format gambar, maks 5MB)</p>
+                    </div>
+
+                    <!-- Submit -->
+                    <div class="form-submit-wrap">
+                        <button type="submit" class="btn-submit" id="btn-submit-webinar">
+                            <span>🚀 Daftar Sekarang</span>
+                        </button>
+                    </div>
+                    <p class="form-footer-note">Dengan mendaftar, kamu menyetujui syarat & ketentuan Webinar Nasional TFS 2026.</p>
+
+                </form>
+            </div>
+        </div><!-- /tab-pendaftaran -->
+
+    </div><!-- /page-wrapper -->
+
+    <script>
+        // Tab switching
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                btn.classList.add('active');
+                document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+            });
+        });
+
+        // File upload zones — drag/drop & filename display
+        document.querySelectorAll('.upload-zone').forEach(zone => {
+            const input = zone.querySelector('input[type="file"]');
+            const fnameEl = zone.querySelector('.upload-filename');
+
+            // Drag events
+            ['dragenter', 'dragover'].forEach(evt => {
+                zone.addEventListener(evt, e => { e.preventDefault(); zone.classList.add('dragover'); });
+            });
+            ['dragleave', 'drop'].forEach(evt => {
+                zone.addEventListener(evt, e => { e.preventDefault(); zone.classList.remove('dragover'); });
+            });
+            zone.addEventListener('drop', e => {
+                if (e.dataTransfer.files.length) {
+                    input.files = e.dataTransfer.files;
+                    input.dispatchEvent(new Event('change'));
+                }
+            });
+
+            // Show filename on change
+            input.addEventListener('change', () => {
+                if (input.files.length) {
+                    fnameEl.textContent = '✅ ' + input.files[0].name;
+                    zone.classList.add('has-file');
+                } else {
+                    fnameEl.textContent = '';
+                    zone.classList.remove('has-file');
+                }
+            });
+        });
+
+        // Prevent actual submit (backend not configured yet)
+        document.getElementById('webinar-reg-form').addEventListener('submit', e => {
+            e.preventDefault();
+            alert('Terima kasih! Form berhasil diisi.\nIntegrasi backend akan segera dikonfigurasi.');
+        });
+    </script>
 </body>
 
 </html>
