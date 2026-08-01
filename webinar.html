@@ -8,6 +8,7 @@
     <meta name="description" content="Webinar Nasional Technofair & Seminar 2026: Leveraging AI to Accelerate High-Caliber Digital Talents for Indonesia's Digital Sovereignty 2045">
     <link rel="icon" type="image/png" href="logotfs.PNG">
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
         /* ===== DESIGN TOKENS ===== */
         :root {
@@ -581,12 +582,161 @@
         .btn-submit:hover::before { opacity: 1; }
         .btn-submit span { position: relative; z-index: 1; }
         .btn-submit:active { transform: translateY(0); }
+        .btn-submit:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        .btn-submit:disabled::before { display: none; }
+
+        .btn-progress-fill {
+            position: absolute;
+            top: 0; left: 0;
+            height: 100%; width: 0%;
+            background: linear-gradient(90deg, rgba(0,229,255,.4), rgba(0,150,200,.8));
+            z-index: 0;
+            transition: width .3s ease;
+            border-radius: 10px;
+        }
 
         .form-footer-note {
             text-align: center;
             margin-top: 18px;
             font-size: 12.5px;
             color: var(--text-dim);
+        }
+
+        #webinar-status {
+            margin-top: 20px;
+            text-align: center;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            font-size: 15px;
+            letter-spacing: .5px;
+            min-height: 24px;
+        }
+
+        /* ===== SYARAT PENDAFTARAN CARDS ===== */
+        .syarat-section {
+            margin-bottom: 36px;
+            animation: fadeInUp .7s ease .1s both;
+        }
+        .syarat-heading {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+        .syarat-heading h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 18px; font-weight: 700;
+            color: var(--gold-pure);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+            margin-top: 40px;
+        }
+        .syarat-heading .line {
+            width: 50px; height: 3px;
+            background: linear-gradient(90deg, var(--cyan-bright), var(--gold-pure));
+            margin: 0 auto;
+            border-radius: 2px;
+        }
+        .syarat-heading p {
+            font-size: 14px;
+            color: var(--text-dim);
+            margin-top: 10px;
+        }
+        .syarat-cards {
+            display: grid;
+            grid-template-columns: 0fr 0fr;
+            gap: 50px;
+        }
+        .syarat-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            background: var(--bg-card);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 30px 20px;
+            position: relative;
+            overflow: hidden;
+            transition: transform .4s ease, box-shadow .4s ease, border-color .35s ease;
+            cursor: pointer;
+            width: 500px;
+        }
+        .syarat-card::before {
+            content: '';
+            position: absolute; top: 0; left: 0; right: 0; height: 3px;
+            transition: opacity .4s;
+        }
+        .syarat-card--twibbon::before {
+            background: linear-gradient(90deg, var(--cyan-bright), #7C4DFF);
+        }
+        .syarat-card--pamflet::before {
+            background: linear-gradient(90deg, var(--gold-pure), var(--orange-fire));
+        }
+        .syarat-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 44px rgba(255,215,0,.1), 0 0 0 1px rgba(255,215,0,.25);
+            border-color: rgba(255,215,0,.35);
+        }
+        .syarat-card__icon {
+            font-size: 48px;
+            margin-bottom: 14px;
+            filter: drop-shadow(0 0 14px rgba(0,229,255,.3));
+            transition: transform .4s ease;
+        }
+        .syarat-card:hover .syarat-card__icon {
+            transform: scale(1.15) rotate(-4deg);
+        }
+        .syarat-card__title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 14px; font-weight: 700;
+            color: var(--white);
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+            text-align: center;
+        }
+        .syarat-card__desc {
+            font-size: 13px;
+            color: rgba(255,255,255,.55);
+            text-align: center;
+            line-height: 1.45;
+            margin-bottom: 16px;
+        }
+        .syarat-card__badge {
+            display: inline-flex; align-items: center; gap: 6px;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 8px;
+            padding: 7px 16px;
+            border-radius: 30px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            transition: all .3s;
+        }
+        .syarat-card--twibbon .syarat-card__badge {
+            background: rgba(0,229,255,.1);
+            border: 1px solid rgba(0,229,255,.35);
+            color: var(--cyan-bright);
+        }
+        .syarat-card--twibbon:hover .syarat-card__badge {
+            background: rgba(0,229,255,.2);
+            box-shadow: 0 0 16px rgba(0,229,255,.2);
+        }
+        .syarat-card--pamflet .syarat-card__badge {
+            background: rgba(255,215,0,.1);
+            border: 1px solid rgba(255,215,0,.35);
+            color: var(--gold-pure);
+        }
+        .syarat-card--pamflet:hover .syarat-card__badge {
+            background: rgba(255,215,0,.2);
+            box-shadow: 0 0 16px rgba(255,215,0,.2);
+        }
+        @media (max-width: 520px) {
+            .syarat-cards { grid-template-columns: 1fr; }
         }
 
         /* ===== ANIMATIONS ===== */
@@ -739,6 +889,29 @@
                 </div>
             </section>
 
+            <!-- SYARAT PENDAFTARAN -->
+            <section class="syarat-section">
+                <div class="syarat-heading">
+                    <h3>Syarat Pendaftaran</h3>
+                    <div class="line"></div>
+                    <p>Selesaikan langkah berikut sebelum mengisi formulir pendaftaran</p>
+                </div>
+                <div class="syarat-cards">
+                    <a href="https://twibify.com/s/twibbon-tfs2026-4" target="_blank" rel="noopener noreferrer" class="syarat-card syarat-card--twibbon" id="card-twibbon">
+                        <div class="syarat-card__icon">🖼️</div>
+                        <div class="syarat-card__title">Buat Twibbon</div>
+                        <p class="syarat-card__desc">Buat dan upload twibbon TFS 2026 di media sosialmu sebagai bukti partisipasi.</p>
+                        <span class="syarat-card__badge">🔗 Buat Sekarang</span>
+                    </a>
+                    <a href="https://drive.google.com/uc?export=download&id=1_1DiidSyiqIqoLREd4bkilgN2QVrrweV" target="_blank" rel="noopener noreferrer" class="syarat-card syarat-card--pamflet" id="card-pamflet">
+                        <div class="syarat-card__icon">📥</div>
+                        <div class="syarat-card__title">Download Pamflet</div>
+                        <p class="syarat-card__desc">Unduh pamflet acara, lalu share ke minimal 3 grup WhatsApp sebagai bukti penyebaran.</p>
+                        <span class="syarat-card__badge">⬇ Download</span>
+                    </a>
+                </div>
+            </section>
+
         </div><!-- /tab-informasi -->
 
         <!-- ==================== TAB: PENDAFTARAN ==================== -->
@@ -837,9 +1010,11 @@
                     <!-- Submit -->
                     <div class="form-submit-wrap">
                         <button type="submit" class="btn-submit" id="btn-submit-webinar">
-                            <span>🚀 Daftar Sekarang</span>
+                            <div class="btn-progress-fill" id="webinar-btn-progress"></div>
+                            <span id="webinar-btn-text">🚀 Daftar Sekarang</span>
                         </button>
                     </div>
+                    <div id="webinar-status"></div>
                     <p class="form-footer-note">Dengan mendaftar, kamu menyetujui syarat & ketentuan Webinar Nasional TFS 2026.</p>
 
                 </form>
@@ -849,7 +1024,12 @@
     </div><!-- /page-wrapper -->
 
     <script>
-        // Tab switching
+        // ── SUPABASE CONFIG (sama dengan LKTI) ──
+        const WB_SUPABASE_URL = "https://fovwlxqoiotbrkdwtlnr.supabase.co";
+        const WB_SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZvdndseHFvaW90YnJrZHd0bG5yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQzODIzMjIsImV4cCI6MjA5OTk1ODMyMn0.Hf3gQUx7P3SZJOl-ZsF3s6UYJT7-zQti6z-lNxvseAg";
+        const wbClient = supabase.createClient(WB_SUPABASE_URL, WB_SUPABASE_ANON_KEY);
+
+        // ── Tab switching ──
         document.querySelectorAll('.tab-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -859,12 +1039,11 @@
             });
         });
 
-        // File upload zones — drag/drop & filename display
+        // ── File upload zones — drag/drop & filename display ──
         document.querySelectorAll('.upload-zone').forEach(zone => {
             const input = zone.querySelector('input[type="file"]');
             const fnameEl = zone.querySelector('.upload-filename');
 
-            // Drag events
             ['dragenter', 'dragover'].forEach(evt => {
                 zone.addEventListener(evt, e => { e.preventDefault(); zone.classList.add('dragover'); });
             });
@@ -878,7 +1057,6 @@
                 }
             });
 
-            // Show filename on change
             input.addEventListener('change', () => {
                 if (input.files.length) {
                     fnameEl.textContent = '✅ ' + input.files[0].name;
@@ -890,10 +1068,159 @@
             });
         });
 
-        // Prevent actual submit (backend not configured yet)
-        document.getElementById('webinar-reg-form').addEventListener('submit', e => {
+        // ── FUNGSI UPLOAD FILE KE SUPABASE STORAGE ──
+        async function uploadWebinarFile(folderName, file, customNamePrefix) {
+            if (!file) return null;
+
+            // Bersihkan nama file dari karakter khusus
+            let originalName = file.name.replace(/\.[^/.]+$/, '');
+            originalName = originalName.replace(/[^a-zA-Z0-9\-_ ]/g, '_');
+            const fileExt = file.name.split('.').pop();
+            const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+            const fileName = `${customNamePrefix}_${originalName}_${timestamp}.${fileExt}`;
+            const filePath = `${folderName}/${fileName}`;
+
+            const { data, error } = await wbClient.storage
+                .from('file_webinar')
+                .upload(filePath, file, {
+                    cacheControl: '3600',
+                    upsert: true
+                });
+
+            if (error) throw new Error(`Gagal upload berkas "${customNamePrefix}": ${error.message}`);
+
+            const { data: urlData } = wbClient.storage
+                .from('file_webinar')
+                .getPublicUrl(filePath);
+
+            return urlData.publicUrl;
+        }
+
+        // ── FORM SUBMIT WEBINAR ──
+        document.getElementById('webinar-reg-form').addEventListener('submit', async function (e) {
             e.preventDefault();
-            alert('Terima kasih! Form berhasil diisi.\nIntegrasi backend akan segera dikonfigurasi.');
+
+            const btnSubmit = document.getElementById('btn-submit-webinar');
+            const statusDiv = document.getElementById('webinar-status');
+            const btnProgress = document.getElementById('webinar-btn-progress');
+            const btnText = document.getElementById('webinar-btn-text');
+
+            // Validasi file
+            const fileTwibbon = document.getElementById('upload-twibbon').files[0];
+            const filePamflet = document.getElementById('upload-pamflet').files[0];
+            const filePayment = document.getElementById('upload-payment').files[0];
+            const fileIg = document.getElementById('upload-ig').files[0];
+
+            if (!fileTwibbon || !filePamflet || !filePayment || !fileIg) {
+                statusDiv.style.color = '#FF3333';
+                statusDiv.innerText = '⚠️ Semua bukti persyaratan wajib diupload!';
+                return;
+            }
+
+            // Validasi ukuran file (maks 5MB per file)
+            const maxSize = 5 * 1024 * 1024;
+            const allFiles = [
+                { file: fileTwibbon, label: 'Bukti Twibbon' },
+                { file: filePamflet, label: 'Bukti Share Pamflet' },
+                { file: filePayment, label: 'Bukti Pembayaran' },
+                { file: fileIg, label: 'Bukti Follow Instagram' }
+            ];
+            for (const item of allFiles) {
+                if (item.file.size > maxSize) {
+                    statusDiv.style.color = '#FF3333';
+                    statusDiv.innerText = `⚠️ File "${item.label}" melebihi batas 5MB!`;
+                    return;
+                }
+            }
+
+            btnSubmit.disabled = true;
+            btnProgress.style.width = '0%';
+            btnText.innerText = 'Mengunggah... 0%';
+            statusDiv.style.color = '#CCAA88';
+            statusDiv.innerText = 'Sedang mengunggah berkas ke server, mohon tunggu...';
+
+            let progressValue = 0;
+            const progressInterval = setInterval(() => {
+                if (progressValue < 85) {
+                    progressValue += Math.random() * 8;
+                    if (progressValue > 85) progressValue = 85;
+                    btnProgress.style.width = progressValue + '%';
+                    btnText.innerText = `Mengunggah... ${Math.floor(progressValue)}%`;
+                }
+            }, 400);
+
+            try {
+                const namaLengkap = document.getElementById('nama').value.trim();
+                const namaClean = namaLengkap.replace(/[^a-zA-Z0-9 ]/g, '');
+
+                // Upload semua file ke Supabase Storage
+                statusDiv.innerText = 'Mengunggah bukti twibbon...';
+                const urlTwibbon = await uploadWebinarFile('bukti_twibbon', fileTwibbon, `Twibbon_${namaClean}`);
+
+                statusDiv.innerText = 'Mengunggah bukti share pamflet...';
+                const urlPamflet = await uploadWebinarFile('bukti_pamflet', filePamflet, `Pamflet_${namaClean}`);
+
+                statusDiv.innerText = 'Mengunggah bukti pembayaran...';
+                const urlPayment = await uploadWebinarFile('bukti_pembayaran', filePayment, `Payment_${namaClean}`);
+
+                statusDiv.innerText = 'Mengunggah bukti follow Instagram...';
+                const urlIg = await uploadWebinarFile('bukti_follow_ig', fileIg, `FollowIG_${namaClean}`);
+
+                // Insert data ke table webinar
+                statusDiv.innerText = 'Berkas terunggah! Memasukkan data ke database...';
+                progressValue = 90;
+                btnProgress.style.width = '90%';
+                btnText.innerText = 'Menyimpan data... 90%';
+
+                const { data: insertData, error: insertError } = await wbClient
+                    .from('webinar')
+                    .insert([
+                        {
+                            nama_lengkap: namaLengkap,
+                            asal_instansi: document.getElementById('instansi').value.trim(),
+                            jurusan: document.getElementById('jurusan').value.trim(),
+                            email: document.getElementById('email').value.trim(),
+                            nomor_whatsapp: document.getElementById('whatsapp').value.trim(),
+                            bukti_unggah_twibbon: urlTwibbon,
+                            bukti_share_pamflet: urlPamflet,
+                            bukti_pembayaran: urlPayment,
+                            bukti_follow_instagram: urlIg
+                        }
+                    ])
+                    .select();
+
+                if (insertError) {
+                    if (insertError.code === '23505') {
+                        throw new Error('Gagal: Data dengan email/nomor ini sudah terdaftar sebelumnya!');
+                    }
+                    throw new Error(insertError.message);
+                }
+
+                // Sukses
+                clearInterval(progressInterval);
+                btnProgress.style.width = '100%';
+                btnText.innerText = '✅ Berhasil! 100%';
+                statusDiv.style.color = '#00E5FF';
+                statusDiv.innerText = '🎉 Pendaftaran berhasil! Terima kasih telah mendaftar Webinar Nasional TFS 2026.';
+
+                // Redirect ke halaman thank you setelah 2 detik
+                setTimeout(() => {
+                    window.location.href = 'thankyou.html';
+                }, 2000);
+
+            } catch (error) {
+                clearInterval(progressInterval);
+                btnProgress.style.width = '0%';
+                btnText.innerText = '❌ Gagal Mengirim';
+                console.error('Error Webinar Submit:', error);
+                statusDiv.style.color = '#FF3333';
+                statusDiv.innerText = '⚠️ ' + (error.message || 'Terjadi kesalahan sistem, silakan coba lagi.');
+            } finally {
+                btnSubmit.disabled = false;
+                if (statusDiv.style.color === 'rgb(255, 51, 51)' || statusDiv.style.color === '#FF3333') {
+                    btnText.innerText = '🔄 Kirim Ulang';
+                }
+            }
         });
     </script>
 </body>
