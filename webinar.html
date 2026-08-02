@@ -646,11 +646,17 @@
             color: var(--text-dim);
             margin-top: 10px;
         }
-        .syarat-cards {
+        /* ===== SYARAT 2x2 GRID CONTAINER ===== */
+        .syarat-grid-container {
             display: grid;
-            grid-template-columns: 0fr 0fr;
-            gap: 50px;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto auto;
+            gap: 28px;
+            max-width: 1060px;
+            margin: 0 auto;
         }
+
+        /* ── Cards (top row) ── */
         .syarat-card {
             display: flex;
             flex-direction: column;
@@ -659,13 +665,12 @@
             text-decoration: none;
             background: var(--bg-card);
             border: 1px solid var(--glass-border);
-            border-radius: 16px;
-            padding: 30px 20px;
+            border-radius: 18px;
+            padding: 34px 24px 30px;
             position: relative;
             overflow: hidden;
             transition: transform .4s ease, box-shadow .4s ease, border-color .35s ease;
             cursor: pointer;
-            width: 500px;
         }
         .syarat-card::before {
             content: '';
@@ -684,9 +689,9 @@
             border-color: rgba(255,215,0,.35);
         }
         .syarat-card__icon {
-            font-size: 48px;
-            margin-bottom: 14px;
-            filter: drop-shadow(0 0 14px rgba(0,229,255,.3));
+            font-size: 52px;
+            margin-bottom: 16px;
+            filter: drop-shadow(0 0 16px rgba(0,229,255,.3));
             transition: transform .4s ease;
         }
         .syarat-card:hover .syarat-card__icon {
@@ -694,24 +699,25 @@
         }
         .syarat-card__title {
             font-family: 'Orbitron', sans-serif;
-            font-size: 14px; font-weight: 700;
+            font-size: 15px; font-weight: 700;
             color: var(--white);
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             letter-spacing: 1px;
             text-align: center;
         }
         .syarat-card__desc {
-            font-size: 13px;
+            font-size: 13.5px;
             color: rgba(255,255,255,.55);
             text-align: center;
-            line-height: 1.45;
-            margin-bottom: 16px;
+            line-height: 1.5;
+            margin-bottom: 18px;
+            max-width: 340px;
         }
         .syarat-card__badge {
             display: inline-flex; align-items: center; gap: 6px;
             font-family: 'Press Start 2P', monospace;
             font-size: 8px;
-            padding: 7px 16px;
+            padding: 8px 18px;
             border-radius: 30px;
             letter-spacing: 1.5px;
             text-transform: uppercase;
@@ -735,8 +741,129 @@
             background: rgba(255,215,0,.2);
             box-shadow: 0 0 16px rgba(255,215,0,.2);
         }
-        @media (max-width: 520px) {
-            .syarat-cards { grid-template-columns: 1fr; }
+
+        /* ── Caption containers (bottom row) ── */
+        .caption-container {
+            background: rgba(15, 5, 8, 0.9);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 0;
+            position: relative;
+            overflow: hidden;
+            transition: border-color .35s ease, box-shadow .35s ease;
+        }
+        .caption-container:hover {
+            border-color: rgba(255,215,0,.3);
+            box-shadow: 0 8px 32px rgba(0,0,0,.3);
+        }
+        .caption-container--twibbon::before {
+            content: '';
+            position: absolute; top: 0; left: 0; right: 0; height: 3px;
+            background: linear-gradient(90deg, var(--cyan-bright), #7C4DFF);
+        }
+        .caption-container--pamflet::before {
+            content: '';
+            position: absolute; top: 0; left: 0; right: 0; height: 3px;
+            background: linear-gradient(90deg, var(--gold-pure), var(--orange-fire));
+        }
+
+        .caption-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 20px 12px;
+            border-bottom: 1px solid rgba(255,215,0,.08);
+        }
+        .caption-header__title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+        .caption-container--twibbon .caption-header__title {
+            color: var(--cyan-bright);
+        }
+        .caption-container--pamflet .caption-header__title {
+            color: var(--gold-pure);
+        }
+        .caption-header__icon {
+            font-size: 16px;
+        }
+
+        .btn-copy {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255,255,255,.06);
+            border: 1px solid rgba(255,215,0,.2);
+            border-radius: 8px;
+            padding: 7px 14px;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-dim);
+            cursor: pointer;
+            transition: all .3s;
+            letter-spacing: .5px;
+        }
+        .btn-copy:hover {
+            background: rgba(255,215,0,.1);
+            border-color: var(--gold-warm);
+            color: var(--gold-pure);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(255,215,0,.1);
+        }
+        .btn-copy.copied {
+            background: rgba(0,229,255,.12);
+            border-color: rgba(0,229,255,.4);
+            color: var(--cyan-bright);
+        }
+        .btn-copy__icon {
+            font-size: 14px;
+            transition: transform .2s;
+        }
+        .btn-copy:hover .btn-copy__icon {
+            transform: scale(1.1);
+        }
+
+        .caption-body {
+            padding: 16px 20px 20px;
+            max-height: 280px;
+            overflow-y: auto;
+        }
+        .caption-body::-webkit-scrollbar {
+            width: 5px;
+        }
+        .caption-body::-webkit-scrollbar-track {
+            background: rgba(255,255,255,.03);
+            border-radius: 4px;
+        }
+        .caption-body::-webkit-scrollbar-thumb {
+            background: rgba(255,215,0,.2);
+            border-radius: 4px;
+        }
+        .caption-body::-webkit-scrollbar-thumb:hover {
+            background: rgba(255,215,0,.35);
+        }
+        .caption-text {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 13px;
+            line-height: 1.65;
+            color: rgba(255,255,255,.7);
+            white-space: pre-wrap;
+            word-break: break-word;
+            user-select: text;
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 700px) {
+            .syarat-grid-container {
+                grid-template-columns: 1fr;
+            }
         }
 
         /* ===== ANIMATIONS ===== */
@@ -896,7 +1023,8 @@
                     <div class="line"></div>
                     <p>Selesaikan langkah berikut sebelum mengisi formulir pendaftaran</p>
                 </div>
-                <div class="syarat-cards">
+                <div class="syarat-grid-container">
+                    <!-- ROW 1: Cards -->
                     <a href="https://twibify.com/s/twibbon-tfs2026-4" target="_blank" rel="noopener noreferrer" class="syarat-card syarat-card--twibbon" id="card-twibbon">
                         <div class="syarat-card__icon">🖼️</div>
                         <div class="syarat-card__title">Buat Twibbon</div>
@@ -909,6 +1037,94 @@
                         <p class="syarat-card__desc">Unduh pamflet acara, lalu share ke minimal 3 grup WhatsApp sebagai bukti penyebaran.</p>
                         <span class="syarat-card__badge">⬇ Download</span>
                     </a>
+
+                    <!-- ROW 2: Caption Containers -->
+                    <div class="caption-container caption-container--twibbon" id="caption-twibbon-container">
+                        <div class="caption-header">
+                            <div class="caption-header__title">
+                                <span class="caption-header__icon">📋</span>
+                                Caption Twibbon
+                            </div>
+                            <button class="btn-copy" data-target="caption-twibbon-text" aria-label="Salin caption twibbon">
+                                <span class="btn-copy__icon">📄</span>
+                                <span class="btn-copy__label">Salin</span>
+                            </button>
+                        </div>
+                        <div class="caption-body">
+                            <div class="caption-text" id="caption-twibbon-text">[Berikan kutipan paling visioner versimu!! Contohnya, 😎👉 "The future belongs to those who build it, not just those who wait for it."]
+Hello Innovators ! 🚀✨
+
+Saya [Nama] dari [Asal Instansi atau asal daerah] dengan antusiasme tinggi siap berpartisipasi dalam Webinar Nasional 𝘛𝘦𝘤𝘩𝘯𝘰 𝘍𝘢𝘪𝘳 𝘢𝘯𝘥 𝖲𝖾𝗆𝗂𝗇𝖺𝗋 𝟤𝟢𝟤6 untuk mengeksplorasi peran Artificial Intelligence (AI) dalam membangun talenta digital unggul menuju Indonesia Emas 2045! 🚀
+
+𝘚𝘱𝘪𝘭𝘭 biaya registrasi??🤩
+Hanya dengan 10 ribu aja kita bisa dapet 𝘣𝘦𝘯𝘦𝘧𝘪𝘵 sebanyak ini loh:
+🗣️ Menambah wawasan tentang AI dan masa depan digital!
+📜 E-sertifikat untuk menunjang CV &amp; LinkedIn kamu!
+📚 Soft-file materi eksklusif!
+🤩 Challenge Instastory seru!
+🎮 Quiz berhadiah!
+🎁 Kesempatan mendapatkan e-money!
+
+[Mention 3 orang teman kamu]
+
+Yuk kepoin disini!! 👇📱
+ Instagram: @ukmpp_polinema @tfs_polinema
+ Twitter: @ukmpp_polinema
+ YouTube: UKM Pendidikan dan Penalaran Polinema
+
+ #TFS2026 #UKMPPPolinema #PoliteknikNegeriMalang #WebinarNasional #ArtificialIntelligence</div>
+                        </div>
+                    </div>
+
+                    <div class="caption-container caption-container--pamflet" id="caption-pamflet-container">
+                        <div class="caption-header">
+                            <div class="caption-header__title">
+                                <span class="caption-header__icon">📋</span>
+                                Caption Pamflet
+                            </div>
+                            <button class="btn-copy" data-target="caption-pamflet-text" aria-label="Salin caption pamflet">
+                                <span class="btn-copy__icon">📄</span>
+                                <span class="btn-copy__label">Salin</span>
+                            </button>
+                        </div>
+                        <div class="caption-body">
+                            <div class="caption-text" id="caption-pamflet-text">[𝙊𝙋𝙀𝙉 𝙍𝙀𝙂𝙄𝙎𝙏𝙍𝘼𝙏𝙄𝙊𝙉 𝗪𝗘𝗕𝗜𝗡𝗔𝗥 𝗡𝗔𝗦𝗜𝗢𝗡𝗔𝗟 𝙏𝙀𝘾𝙃𝙉𝙊 𝙁𝘼𝙄𝙍 𝘼𝙉𝘿 𝗦𝗘𝗠𝗜𝗡𝗔𝗥 𝟮𝟬𝟮𝟲]
+
+𝙃𝙚𝙡𝙡𝙤 𝙄𝙣𝙣𝙤𝙫𝙖𝙩𝙤𝙧𝙨 ! 🚀✨
+📢𝐏𝐞𝐧𝐝𝐚𝐟𝐭𝐚𝐫𝐚𝐧 𝐖𝐞𝐛𝐢𝐧𝐚𝐫 𝐍𝐚𝐬𝐢𝐨𝐧𝐚𝐥 𝙏𝙚𝙘𝙝𝙣𝙤 𝙁𝙖𝙞𝙧 𝙖𝙣𝙙 𝐒𝐞𝐦𝐢𝐧𝐚𝐫 𝟐𝟎𝟐𝟔 𝐭𝐞𝐥𝐚𝐡 𝐝𝐢𝐛𝐮𝐤𝐚!
+
+Perluas wawasanmu bersama narasumber inspiratif yang akan membahas peran 𝘈𝘳𝘵𝘪𝘧𝘪𝘤𝘪𝘢𝘭 𝘐𝘯𝘵𝘦𝘭𝘭𝘪𝘨𝘦𝘯𝘤𝘦 dalam membentuk talenta digital generasi emas Indonesia 2045.
+Dengan mengangkat topik:
+"𝘈𝘳𝘤𝘩𝘪𝘵𝘦𝘤𝘵𝘪𝘯𝘨 𝘵𝘩𝘦 𝘍𝘶𝘵𝘶𝘳𝘦: 𝘓𝘦𝘷𝘦𝘳𝘢𝘨𝘪𝘯𝘨 𝘈𝘐 𝘵𝘰 𝘈𝘤𝘤𝘦𝘭𝘦𝘳𝘢𝘵𝘦 𝘏𝘪𝘨𝘩-𝘊𝘢𝘭𝘪𝘣𝘦𝘳 𝘋𝘪𝘨𝘪𝘵𝘢𝘭 𝘛𝘢𝘭𝘦𝘯𝘵𝘴 𝘧𝘰𝘳 𝘐𝘯𝘥𝘰𝘯𝘦𝘴𝘪𝘢'𝘴 𝘋𝘪𝘨𝘪𝘵𝘢𝘭 𝘚𝘰𝘷𝘦𝘳𝘦𝘪𝘨𝘯𝘵𝘺 2045" 💡✨
+
+𝘽𝙚𝙣𝙚𝙛𝙞𝙩 𝗺𝗲𝗻𝗴𝗶𝗸𝘂𝘁𝗶 𝗪𝗲𝗯𝗶𝗻𝗮𝗿:⁣
+ 🗣️ Menambah wawasan mengenai 𝘈𝘳𝘵𝘪𝘧𝘪𝘤𝘪𝘢𝘭 𝘐𝘯𝘵𝘦𝘭𝘭𝘪𝘨𝘦𝘯𝘤𝘦 dan 𝘋𝘪𝘨𝘪𝘵𝘢𝘭 𝘚𝘰𝘷𝘦𝘳𝘦𝘪𝘨𝘯𝘵𝘺 oleh pemateri dan motivator yang berpengalaman di bidangnya!
+ 📜 E-sertifikat untuk menunjang profil LinkedIn-mu!
+ 📚 𝘚𝘰𝘧𝘵-𝘧𝘪𝘭𝘦 materi eksklusif!
+ 🤩 𝘊𝘩𝘢𝘭𝘭𝘦𝘯𝘨𝘦 𝘐𝘯𝘴𝘵𝘢𝘴𝘵𝘰𝘳𝘺 seru!
+ 🎮 𝘘𝘶𝘪𝘻 Berhadiah!
+ 🎁 Kesempatan memenangkan 𝘥𝘰𝘰𝘳𝘱𝘳𝘪𝘻𝘦 menarik!
+
+𝗦𝘆𝗮𝗿𝗮𝘁 𝗣𝗲𝗻𝗱𝗮𝗳𝘁𝗮𝗿𝗮𝗻:
+ Ikuti 𝘤𝘩𝘢𝘭𝘭𝘦𝘯𝘨𝘦 twibbon terfavorit dengan mengunggah foto dan twibbon melalui Instagram pribadi yang tidak di-𝘱𝘳𝘪𝘷𝘢𝘵𝘦 dengan 𝘵𝘦𝘮𝘱𝘭𝘢𝘵𝘦 𝘤𝘢𝘱𝘵𝘪𝘰𝘯 yang dapat diakses melalui 𝘙𝘦𝘨𝘪𝘴𝘵𝘳𝘢𝘵𝘪𝘰𝘯 𝘓𝘪𝘯𝘬.
+𝙍𝙚𝙜𝙞𝙨𝙩𝙧𝙖𝙩𝙞𝙤𝙣 𝙇𝙞𝙣𝙠 𝙖𝙣𝙙 𝙂𝙪𝙞𝙙𝙚𝙗𝙤𝙤𝙠:
+🔗 [https://bit.ly/WebTFS26]
+
+🎓 Jangan lewatkan kesempatan untuk belajar, berdiskusi, dan mengembangkan kompetensi bersama para ahli.
+Daftarkan dirimu sekarang dan jadilah bagian dari perubahan!
+Nantikan informasinya disini👇📱
+Instagram: @ukmpp_polinema @tfs_polinema
+Twitter: @ukmpp_polinema
+YouTube: UKM Pendidikan dan Penalaran Polinema
+Website: www.ukmpp.or.id
+LinkedIn: UKM Pendidikan dan Penalaran Polinema
+
+🚀𝙋𝙧𝙤𝙪𝙙𝙡𝙮 𝙋𝙧𝙚𝙨𝙚𝙣𝙩𝙚𝙙 𝙗𝙮:
+UKM PENDIDIKAN DAN PENALARAN
+POLITEKNIK NEGERI MALANG
+#TFS2026 #UKMPPPolinema #PoliteknikNegeriMalang #WebinarNasional #LombaKaryaTulisIlmiah</div>
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -1221,6 +1437,52 @@
                     btnText.innerText = '🔄 Kirim Ulang';
                 }
             }
+        });
+
+        // ── COPY CAPTION TO CLIPBOARD ──
+        document.querySelectorAll('.btn-copy').forEach(btn => {
+            btn.addEventListener('click', async function() {
+                const targetId = this.getAttribute('data-target');
+                const textEl = document.getElementById(targetId);
+                if (!textEl) return;
+
+                const textToCopy = textEl.innerText;
+                const labelEl = this.querySelector('.btn-copy__label');
+                const iconEl = this.querySelector('.btn-copy__icon');
+
+                try {
+                    await navigator.clipboard.writeText(textToCopy);
+                    this.classList.add('copied');
+                    labelEl.textContent = 'Tersalin!';
+                    iconEl.textContent = '✅';
+
+                    setTimeout(() => {
+                        this.classList.remove('copied');
+                        labelEl.textContent = 'Salin';
+                        iconEl.textContent = '📄';
+                    }, 2000);
+                } catch (err) {
+                    // Fallback for older browsers
+                    const textarea = document.createElement('textarea');
+                    textarea.value = textToCopy;
+                    textarea.style.position = 'fixed';
+                    textarea.style.opacity = '0';
+                    document.body.appendChild(textarea);
+                    textarea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(textarea);
+
+                    this.classList.add('copied');
+                    labelEl.textContent = 'Tersalin!';
+                    iconEl.textContent = '✅';
+
+                    setTimeout(() => {
+                        this.classList.remove('copied');
+                        labelEl.textContent = 'Salin';
+                        iconEl.textContent = '📄';
+                    }, 2000);
+                }
+            });
         });
     </script>
 </body>
